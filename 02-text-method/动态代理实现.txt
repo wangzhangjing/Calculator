@@ -1,0 +1,50 @@
+jkd动态代理
+1反射 method类，表示方法，类中的方法，通过meth偶读可以执行方法
+
+jdk动态代理实现
+反射包 java.lang.reflect , 里面有3个类 :InvocationHandler,method.proxy
+1invocathandler 接口 ：就一个invoke（）
+invoke（）代表代理对象要执行的功能代码，你的代理类要完成的功能就写在invoke中
+代理类完成的功能1 调用目标方法 执行目标方法的功能
+2 功能增强 在目标方法的调用后 增加功能
+    方法的原型public Object invoke(Object proxy, Method method, Object[] args)
+        throws Throwable;
+        Object proxy：jdk创建代理对象，无需赋值
+        Method method：目标类中的方法 jdk提供method 对象的、
+        Object[] args目标类中的方法的参数  jdk提供的
+        怎么用 1创建类实现接口Invocathandler
+        2重写invo可（）方法，把原理的静态代理类中代理完成的功能，写在这
+        怎么用2 method 表示方法的，确切的说就是目标类中的方法
+        作用，通过method可以执行某个目标类中的方法
+     method。inkove （目标对象 方法的参数）
+     meth1.invoke(qq,"张三");
+     说明meth1.invoke就是用来执行目标方法的，等同于静态代理中的
+             //向厂家发送订单，告诉厂家，我买U盘，厂家发货
+             float price = facotory.sell(amount);//厂家价格
+       3proxy 类核心对象，创建代理对象，之前创建对象都是new类的构造方法
+       现在我们使用的proxy类的方法代替new使用
+       方法：静态newproxyInstance（）
+       作用是创建代理对象，等于静态代理中new taobao的语句
+
+          public static Object newProxyInstance(ClassLoader loader,
+                                                 Class<?>[] interfaces,
+                                                 InvocationHandler h)
+      1.ClassLoader loader类加载器，负责向内存中加载对象的，使用反射获取对象的classLoader
+      类a，a.getcalss().getClassLoader(), 目标对象的类加载器
+      2Class<?>[] interfaces，接口目标对象所实现的接口，也是反射获取
+      3InvocationHandler h ，我们自己写的，代理类要完成的功能。
+      返回值就是代理对象
+
+
+      实现动态代理的步骤
+      1创建接口，定义目标类要完成的功能
+      2创建目标类实现接口
+      3创建InvocationHandler接口实现类，在invoke方法中完成代理类功能
+           1调用目标方法
+           2实现增强功能
+      4使用proxy类的静态方法，创建代理对象，并把返回值转为接口类型
+
+      我们可以在不改变目标方法的前提下我可以增加增加的功能代码增强增加的功能代码
+      程序开发中有一个功能是其他人写好的，（不认识）可以使用
+      发现功能还缺少对象，不能完全满足我的项目需求，我需要代码执行后需要增加代码
+      用代理实现调用时，增加自己代理。而不用去改原理的文件
