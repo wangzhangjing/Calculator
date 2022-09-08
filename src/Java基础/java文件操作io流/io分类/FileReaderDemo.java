@@ -1,0 +1,24 @@
+package Java基础.java文件操作io流.io分类;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
+
+public class FileReaderDemo {
+    public static void main(String []args) throws Exception {
+        //每次读取一个字符
+        Reader fr=new FileReader("./src/java文件操作io流/out.txt");
+        //读取一个字符返回，没有返回-1
+//        int code =fr.read();
+//        System.out.println((char) code);
+//        int code;
+//        while ((code=fr.read())!=-1){
+//            System.out.print((char) code);
+//        }
+        char[] bu=new char[1024];
+        int code;
+        while ((code=fr.read(bu))!=-1){
+            System.out.println(new String(bu,0,code));
+        }
+    }
+}

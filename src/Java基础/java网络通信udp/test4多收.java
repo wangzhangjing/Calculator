@@ -1,0 +1,35 @@
+package Java基础.java网络通信udp;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class test4多收 {
+    public static void main(String[] args) throws Exception {
+        System.out.println("开始");
+        //1创建接收端数据
+        DatagramSocket socket =new DatagramSocket(8888);
+
+        //创建一个接收数据包对象（韭菜盘子
+        byte[] bu =new byte[1024 *64];
+        DatagramPacket packet=new DatagramPacket(bu, bu.length);
+
+        while (true){
+            //3.等待接收数据
+            socket.receive(packet);
+
+            //取出数据
+            //读取多少倒多少数据
+            int len = packet.getLength();
+            String rs = new String(bu,0,len);
+            System.out.println("收到了来自"+packet.getAddress()+"端口"+packet.getPort()+"的回复："+rs);
+            if ("quit".equals(rs)){
+                System.out.println("退出");
+                socket.close();
+                break;
+            }
+        }
+        //
+
+
+    }
+}

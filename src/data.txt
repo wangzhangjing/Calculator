@@ -1,0 +1,14 @@
+======Teacher==========
+name=嘿嘿
+sex=男
+salary=5440.0
+======Students==========
+name=猪八戒
+sex=男
+age=1000
+className=西天跑路一班
+hobby=吃，喝，睡
+======Teacher==========
+name=嘿嘿
+sex=男
+salary=5440.0
